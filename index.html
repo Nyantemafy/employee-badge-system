@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Badges Employés</title>
+    <link rel="stylesheet" href="style/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Système de Gestion de Badges</h1>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showView('add')">Ajouter Employé</button>
+            <button class="tab" onclick="showView('list')">Liste des Employés</button>
+            
+        </div>
+
+        <!-- Vue Ajout -->
+        <div id="addView" class="view active">
+            <div id="addMessage" class="message"></div>
+            
+            <form id="employeeForm">
+                <div class="form-group">
+                    <label for="firstName">Prénom *</label>
+                    <input type="text" id="firstName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Nom *</label>
+                    <input type="text" id="lastName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Numéro de téléphone *</label>
+                    <input type="tel" id="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Titre / Poste *</label>
+                    <input type="text" id="title" required>
+                </div>
+
+                <button type="submit" class="btn">Enregistrer l'employé</button>
+            </form>
+        </div>
+
+        <!-- Vue Liste -->
+        <div id="listView" class="view">
+            <div class="toolbar">
+                <button class="btn" onclick="downloadExcel()">Télécharger Excel</button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Rechercher par nom ou ID..." onkeyup="filterEmployees()">
+            </div>
+            <div id="employeeList" class="employee-list"></div>
+        </div>
+
+        <!-- Vue Détails -->
+        <div id="detailView" class="view">
+            <div class="detail-card">
+                <h2 id="detailName"></h2>
+                <div class="toolbar" style="justify-content:center;">
+                    <button class="btn" onclick="downloadBadge()">Télécharger Badge PDF</button>
+                </div>
+                
+                <div class="qr-container">
+                    <div id="qrcode"></div>
+                </div>
+
+                <div class="employee-info">
+                    <div class="info-row">
+                        <span class="info-label">ID :</span>
+                        <span class="info-value" id="detailId"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Nom complet :</span>
+                        <span class="info-value" id="detailFullName"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Téléphone :</span>
+                        <span class="info-value" id="detailPhone"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Titre :</span>
+                        <span class="info-value" id="detailTitle"></span>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="showView('list')">Retour à la liste</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
